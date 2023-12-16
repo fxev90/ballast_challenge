@@ -9,9 +9,11 @@ use App\Http\Resources\Authors\AuthorsResource;
 use App\Models\Authors;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Essa\APIToolKit\Api\ApiResponse;
 
 class AuthorsController extends Controller
 {
+    use ApiResponse;
     public function __construct()
     {
 
@@ -26,19 +28,19 @@ class AuthorsController extends Controller
 
     public function store(CreateAuthorsRequest $request): JsonResponse
     {
-        $authors = Authors::create($request->validated());
+        $author = Authors::create($request->validated());
 
-        return $this->responseCreated('Authors created successfully', new AuthorsResource($authors));
+        return $this->responseCreated('Authors created successfully', new AuthorsResource($author));
     }
 
-    public function show(Authors $authors): JsonResponse
+    public function show(Authors $author): JsonResponse
     {
-        return $this->responseSuccess(null, new AuthorsResource($authors));
+        return $this->responseSuccess(null, new AuthorsResource($author));
     }
 
-    public function update(UpdateAuthorsRequest $request, Authors $authors): JsonResponse
+    public function update(UpdateAuthorsRequest $request, Authors $author): JsonResponse
     {
-        $authors->update($request->validated());
+        $author->update($request->validated());
 
         return $this->responseSuccess('Authors updated Successfully', new AuthorsResource($authors));
     }
@@ -50,5 +52,5 @@ class AuthorsController extends Controller
         return $this->responseDeleted();
     }
 
-   
+
 }

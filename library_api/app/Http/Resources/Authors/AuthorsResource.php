@@ -10,7 +10,8 @@ class AuthorsResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            
+            'names' => $this->author_names,
+            'last_names'=> $this->author_last_names,
             'created_at' => dateTimeFormat($this->created_at),
             'updated_at' => dateTimeFormat($this->updated_at),
         ];
