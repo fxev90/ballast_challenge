@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*===========================
+=           authors           =
+=============================*/
+
+Route::apiResource('/authors', \App\Http\Controllers\API\AuthorsController::class);
+
+/*=====  End of authors   ======*/
