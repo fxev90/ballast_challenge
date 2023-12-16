@@ -13,7 +13,8 @@ class BookView extends Model
     use HasFactory, Filterable;
 
     protected string $default_filters = BookViewFilters::class;
-
+    protected $primaryKey = 'book_id'; 
+    protected $table = 'book_view';
     /**
      * Mass-assignable attributes.
      *
