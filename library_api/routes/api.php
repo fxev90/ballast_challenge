@@ -33,3 +33,19 @@ Route::apiResource('/authors', \App\Http\Controllers\API\AuthorsController::clas
 Route::apiResource('/genres', \App\Http\Controllers\API\GenreController::class);
 
 /*=====  End of genres   ======*/
+
+/*===========================
+=           books           =
+=============================*/
+
+Route::apiResource('/books', \App\Http\Controllers\API\BookController::class);
+
+/*=====  End of books   ======*/
+
+/*===========================
+=           bookViews           =
+=============================*/
+
+Route::apiResource('/bookViews', \App\Http\Controllers\API\BookViewController::class);
+
+/*=====  End of bookViews   ======*/
