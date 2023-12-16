@@ -42,7 +42,7 @@ class AuthorsController extends Controller
     {
         $author->update($request->validated());
 
-        return $this->responseSuccess('Authors updated Successfully', new AuthorsResource($authors));
+        return $this->responseSuccess('Authors updated Successfully', new AuthorsResource($author));
     }
 
     public function destroy(Authors $authors): JsonResponse
