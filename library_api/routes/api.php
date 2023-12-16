@@ -25,3 +25,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/authors', \App\Http\Controllers\API\AuthorsController::class);
 
 /*=====  End of authors   ======*/
+
+/*===========================
+=           genres           =
+=============================*/
+
+Route::apiResource('/genres', \App\Http\Controllers\API\GenreController::class);
+
+/*=====  End of genres   ======*/
