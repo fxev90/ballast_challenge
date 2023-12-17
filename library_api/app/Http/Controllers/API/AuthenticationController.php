@@ -31,6 +31,7 @@ class AuthenticationController extends Controller
         $user->last_names = $request->last_names;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->user_type = 'Member';
         $user->save();
 
         $token = $user->createToken('librarySanctumAppToken')->plainTextToken;
@@ -65,6 +66,7 @@ class AuthenticationController extends Controller
             $expires_at = date('M d, Y H:i A', strtotime($timestamp));
             return response()->json([
                 'status' => true,
+                'user' => $user,
                 'message' => 'Login successful',
                 'access_token' => $token,
                 'token_type' => 'bearer',
