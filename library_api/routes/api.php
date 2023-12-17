@@ -56,3 +56,11 @@ Route::apiResource('/books', \App\Http\Controllers\API\BookController::class);
 Route::apiResource('/bookViews', \App\Http\Controllers\API\BookViewController::class);
 
 /*=====  End of bookViews   ======*/
+
+/*===========================
+=           borrowings           =
+=============================*/
+
+Route::apiResource('/borrowings', \App\Http\Controllers\API\BorrowingController::class)->middleware('auth:sanctum');
+
+/*=====  End of borrowings   ======*/
