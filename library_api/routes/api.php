@@ -74,3 +74,11 @@ Route::get('/borrowings-total','\App\Http\Controllers\API\BorrowingController@to
 Route::apiResource('/borrowedBooks', \App\Http\Controllers\API\BorrowedBooksController::class);
 
 /*=====  End of borrowedBooks   ======*/
+
+/*===========================
+=           usersDueBooks           =
+=============================*/
+
+Route::apiResource('/usersDueBooks', \App\Http\Controllers\API\UsersDueBookController::class);
+
+/*=====  End of usersDueBooks   ======*/
