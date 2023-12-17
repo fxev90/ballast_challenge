@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Actions\ReturnBook;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Borrowing\ReturnBorrowingRequest;
 use App\Http\Requests\Borrowing\UpdateBorrowingRequest;
 use App\Http\Requests\Borrowing\CreateBorrowingRequest;
 use App\Http\Resources\Borrowing\BorrowingResource;
@@ -51,5 +53,9 @@ class BorrowingController extends Controller
         return $this->responseDeleted();
     }
 
-   
+    public function returnsBook(ReturnBorrowingRequest $request ,Borrowing $borrowing)
+    {
+        app(ReturnBook::class)->execute($borrowing);
+        return $this->responseSuccess('Book returned Successfully', new BorrowingResource($borrowing));
+    }
 }

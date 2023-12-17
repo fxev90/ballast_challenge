@@ -3,7 +3,8 @@
 namespace App\Http\Requests\Borrowing;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Models\Book;
+use App\Models\Borrowing;
 class CreateBorrowingRequest extends FormRequest
 {
     public function rules(): array
@@ -15,9 +16,9 @@ class CreateBorrowingRequest extends FormRequest
                 'unique:borrowings,book_id,NULL,id,returned_date,NULL,user_id,' . auth()->user()->id,
                 function ($attribute, $value, $fail) {
                     // Check if there are any unreturned borrowings for the selected book and counthow many
-                    $countUnreturnedBorrowings = \App\Models\Borrowing::where('book_id', $value)->whereNull('returned_date')->count();
+                    $countUnreturnedBorrowings = Borrowing::where('book_id', $value)->whereNull('returned_date')->count();
     
-                    if ($countUnreturnedBorrowings >= \App\Models\Book::find($value)->book_copies) {
+                    if ($countUnreturnedBorrowings >= Book::find($value)->book_copies) {
                         $fail("The selected book has no more available copies to borrow.");
                     }
                 },
