@@ -34,7 +34,7 @@ class AuthenticationController extends Controller
         $user->user_type = 'Member';
         $user->save();
 
-        $token = $user->createToken('librarySanctumAppToken')->plainTextToken;
+        $token = $user->createToken('librarySanctumAppToken',[$user->user_type])->plainTextToken;
 
         return response()->json([
             'status' => true,
@@ -62,7 +62,7 @@ class AuthenticationController extends Controller
         if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password])) {
             $user = Auth::user();
             $timestamp = now()->addMinute(10800);
-            $token = $user->createToken('librarySanctumAppToken',['*'],$timestamp)->plainTextToken;
+            $token = $user->createToken('librarySanctumAppToken',[$user->user_type],$timestamp)->plainTextToken;
             $expires_at = date('M d, Y H:i A', strtotime($timestamp));
             return response()->json([
                 'status' => true,

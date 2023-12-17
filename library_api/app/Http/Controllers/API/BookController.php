@@ -17,7 +17,13 @@ class BookController extends Controller
     use ApiResponse;
     public function __construct()
     {
-
+        $this->middleware('abilities:Librarian', [
+            'only' => [
+                'update',
+                'store',
+                'destroy'
+            ]
+        ]);
     }
 
     public function index(): AnonymousResourceCollection

@@ -45,15 +45,15 @@ Route::apiResource('/genres', \App\Http\Controllers\API\GenreController::class);
 =           books           =
 =============================*/
 
-Route::apiResource('/books', \App\Http\Controllers\API\BookController::class);
-Route::get('/books-total', '\App\Http\Controllers\API\BookController@totalBooks');
+Route::apiResource('/books', \App\Http\Controllers\API\BookController::class)->middleware('auth:sanctum');
+Route::get('/books-total', '\App\Http\Controllers\API\BookController@totalBooks')->middleware('auth:sanctum');
 /*=====  End of books   ======*/
 
 /*===========================
 =           bookViews           =
 =============================*/
 
-Route::apiResource('/bookViews', \App\Http\Controllers\API\BookViewController::class);
+Route::apiResource('/bookViews', \App\Http\Controllers\API\BookViewController::class)->middleware('auth:sanctum');
 
 /*=====  End of bookViews   ======*/
 
@@ -71,7 +71,7 @@ Route::get('/borrowings-total','\App\Http\Controllers\API\BorrowingController@to
 =           borrowedBooks           =
 =============================*/
 
-Route::apiResource('/borrowedBooks', \App\Http\Controllers\API\BorrowedBooksController::class);
+Route::apiResource('/borrowedBooks', \App\Http\Controllers\API\BorrowedBooksController::class)->middleware('auth:sanctum');
 
 /*=====  End of borrowedBooks   ======*/
 
@@ -79,6 +79,6 @@ Route::apiResource('/borrowedBooks', \App\Http\Controllers\API\BorrowedBooksCont
 =           usersDueBooks           =
 =============================*/
 
-Route::apiResource('/usersDueBooks', \App\Http\Controllers\API\UsersDueBookController::class);
+Route::apiResource('/usersDueBooks', \App\Http\Controllers\API\UsersDueBookController::class)->middleware('auth:sanctum');
 
 /*=====  End of usersDueBooks   ======*/
