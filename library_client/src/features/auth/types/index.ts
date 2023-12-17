@@ -7,13 +7,10 @@ export interface User {
   names: string;
   last_names: string;
   email: string;
-  updated_at: Date;
-  created_at: Date;
   id: number;
 }
 
-export interface UserRegistrationDTO
-  extends Omit<User, "updated_at" | "created_at" | "id"> {
+export interface UserRegistrationDTO extends Omit<User, "id"> {
   password: string;
   password_confirmation: string;
 }
