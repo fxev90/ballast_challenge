@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Actions\CreateBook;
+use App\Actions\UpdateBook;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Book\UpdateBookRequest;
 use App\Http\Requests\Book\CreateBookRequest;
@@ -40,8 +41,8 @@ class BookController extends Controller
 
     public function update(UpdateBookRequest $request, Book $book): JsonResponse
     {
-        $book->update($request->validated());
-
+        $data = $request->validated();
+        $book = app(UpdateBook::class)->execute($data, $book);
         return $this->responseSuccess('Book updated Successfully', new BookResource($book));
     }
 
@@ -52,5 +53,5 @@ class BookController extends Controller
         return $this->responseDeleted();
     }
 
-   
+
 }
