@@ -66,3 +66,11 @@ Route::post('/borrowings/{borrowing}/return','\App\Http\Controllers\API\Borrowin
 Route::get('/borrowings-total','\App\Http\Controllers\API\BorrowingController@totalBorrowed')->middleware('auth:sanctum');
 
 /*=====  End of borrowings   ======*/
+
+/*===========================
+=           borrowedBooks           =
+=============================*/
+
+Route::apiResource('/borrowedBooks', \App\Http\Controllers\API\BorrowedBooksController::class);
+
+/*=====  End of borrowedBooks   ======*/
