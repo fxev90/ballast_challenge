@@ -60,8 +60,8 @@ class AuthenticationController extends Controller
 
         if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password])) {
             $user = Auth::user();
-            $token = $user->createToken('librarySanctumAppToken')->plainTextToken;
             $timestamp = now()->addMinute(10800);
+            $token = $user->createToken('librarySanctumAppToken',['*'],$timestamp)->plainTextToken;
             $expires_at = date('M d, Y H:i A', strtotime($timestamp));
             return response()->json([
                 'status' => true,
