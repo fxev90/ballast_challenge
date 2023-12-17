@@ -53,5 +53,15 @@ class BookController extends Controller
         return $this->responseDeleted();
     }
 
-
+    public function totalBooks(){
+        $totalCopies = \DB::table('books')->sum('book_copies');
+        $response = [
+            "status" => 200,
+            "message" => "Total of books in the library",
+            "data" => [
+                "total_books" => $totalCopies
+            ],
+        ];
+        return response()->json($response);
+    }
 }

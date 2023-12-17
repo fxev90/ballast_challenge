@@ -46,7 +46,7 @@ Route::apiResource('/genres', \App\Http\Controllers\API\GenreController::class);
 =============================*/
 
 Route::apiResource('/books', \App\Http\Controllers\API\BookController::class);
-
+Route::get('/books-total', '\App\Http\Controllers\API\BookController@totalBooks');
 /*=====  End of books   ======*/
 
 /*===========================
