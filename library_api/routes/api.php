@@ -63,5 +63,6 @@ Route::apiResource('/bookViews', \App\Http\Controllers\API\BookViewController::c
 
 Route::apiResource('/borrowings', \App\Http\Controllers\API\BorrowingController::class)->middleware('auth:sanctum');
 Route::post('/borrowings/{borrowing}/return','\App\Http\Controllers\API\BorrowingController@returnsBook')->middleware('auth:sanctum');
+Route::get('/borrowings-total','\App\Http\Controllers\API\BorrowingController@totalBorrowed')->middleware('auth:sanctum');
 
 /*=====  End of borrowings   ======*/

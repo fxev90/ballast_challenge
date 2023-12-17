@@ -58,4 +58,16 @@ class BorrowingController extends Controller
         app(ReturnBook::class)->execute($borrowing);
         return $this->responseSuccess('Book returned Successfully', new BorrowingResource($borrowing));
     }
+
+    public function totalBorrowed(){
+        $totalBorrowed = \DB::table('borrowings')->whereNull('returned_date')->count('*');
+        $response = [
+            "status" => 200,
+            "message" => "Total of borrowed books  in the library",
+            "data" => [
+                "total_borrowed_books" => $totalBorrowed 
+            ],
+        ];
+        return response()->json($response);
+    }
 }
