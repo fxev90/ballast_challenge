@@ -3,18 +3,18 @@ import { LoginCredentialsDTO, User } from "../types";
 import storage from "@/utils/storage";
 import { useMutation } from "@tanstack/react-query";
 
-export const loginWithEmailAndPassword = (
+export const logoutWithEmailAndPassword = (
   data: LoginCredentialsDTO
 ): Promise<{ user: User; access_token: string }> => {
-  return axios.post("/auth/login", data);
+  return axios.post("/logout", data);
 };
 
 export const useLogin = () => {
   return useMutation({
-    onSuccess: (data) => {
-      storage.setToken(data.access_token);
-      storage.setUser(data.user);
+    onSuccess: () => {
+      storage.clearToken();
+      storage.clearUser();
     },
-    mutationFn: loginWithEmailAndPassword,
+    mutationFn: logoutWithEmailAndPassword,
   });
 };
