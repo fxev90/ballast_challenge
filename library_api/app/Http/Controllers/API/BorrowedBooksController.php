@@ -33,7 +33,7 @@ class BorrowedBooksController extends Controller
 
     public function booksOverdue(): AnonymousResourceCollection
     {
-        $borrowedBooks = BorrowedBooks::whereNull('returned_date')->where('due_date', '<=', Carbon::today())->dynamicPaginate();
+        $borrowedBooks = BorrowedBooks::whereNull('returned_date')->where('due_date', '<=', Carbon::today())->useFilters()->dynamicPaginate();
 
         return BorrowedBooksResource::collection($borrowedBooks);
     }
