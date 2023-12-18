@@ -1,3 +1,4 @@
+import { Dashboard } from "@/features/librarian/components/dashboard";
 import { Main } from "@/features/misc";
 import { Navigate } from "react-router-dom";
 
@@ -19,10 +20,7 @@ export const protectedRoutes = {
       children: [
         {
           path: "dashboard",
-          element: (
-            <>
-            </>
-          ),
+          element: <Dashboard />,
         },
         { path: "book/create", element: <>Create a Book</> },
         redirection,
