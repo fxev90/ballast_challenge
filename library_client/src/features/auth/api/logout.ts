@@ -9,11 +9,12 @@ export const logoutWithEmailAndPassword = (
   return axios.post("/logout", data);
 };
 
-export const useLogin = () => {
+export const useLogout = () => {
   return useMutation({
     onSuccess: () => {
       storage.clearToken();
       storage.clearUser();
+      window.location.assign(window.location.origin as unknown as string);
     },
     mutationFn: logoutWithEmailAndPassword,
   });

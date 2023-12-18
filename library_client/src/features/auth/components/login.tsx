@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/form";
 
 const FormSchema = z.object({
-  email: z.string().min(2, "Required"),
-  password: z.string().min(6, "password should be at leas 6 characters long"),
+  email: z.string().email(),
+  password: z.string().min(6, "password should be at least 6 characters long"),
 });
 
 export type DTO = z.infer<typeof FormSchema>;
@@ -39,7 +39,7 @@ export const LoginForm: React.FC<{
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="input email" {...field} />
               </FormControl>
@@ -66,7 +66,9 @@ export const LoginForm: React.FC<{
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="grid place-items-center">
+          <Button type="submit">Submit</Button>
+        </div>
       </form>
     </Form>
   );

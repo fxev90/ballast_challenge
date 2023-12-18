@@ -17,7 +17,7 @@ const storage = {
   getUser: () => {
     return JSON.parse(
       window.localStorage.getItem(`${storagePrefix}user`) as string
-    ) as User;
+    ) as User | null;
   },
   setUser: (user: User) => {
     window.localStorage.setItem(`${storagePrefix}user`, JSON.stringify(user));

@@ -17,14 +17,17 @@ const FormSchema = z
   .object({
     names: z.string().min(2, "Required"),
     last_names: z.string().min(2, "Required"),
-    password: z.string().min(6, "password should be at leas 6 characters long"),
+    email: z.string().email(),
+    password: z
+      .string()
+      .min(6, "password should be at least 6 characters long"),
     password_confirmation: z.string().min(6, {
-      message: "password should be at leas 6 characters long",
+      message: "password should be at least 6 characters long",
     }),
   })
   .refine((data) => data.password === data.password_confirmation, {
     message: "Submitted passwords don't match",
-    path: ["confirm"],
+    path: ["password_confirmation"],
   });
 
 export type DTO = z.infer<typeof FormSchema>;
@@ -36,6 +39,7 @@ export const RegistrationForm: React.FC<{
     resolver: zodResolver(FormSchema),
     defaultValues: {
       names: "",
+      email: "",
       last_names: "",
       password: "",
       password_confirmation: "",
@@ -77,6 +81,20 @@ export const RegistrationForm: React.FC<{
         />
         <FormField
           control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" placeholder="input email" {...field} />
+              </FormControl>
+              <FormDescription>Input account's email.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -111,7 +129,9 @@ export const RegistrationForm: React.FC<{
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="grid place-items-center">
+          <Button type="submit">Submit</Button>
+        </div>
       </form>
     </Form>
   );
