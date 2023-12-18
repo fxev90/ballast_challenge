@@ -35,7 +35,7 @@ export const BookForm: React.FC<{
   submitCallback: (data: DTO) => void;
   authors: Author[];
   genres: Genre[];
-  defaultValues?: {
+  initValues?: {
     title: string;
     isbn: string;
     author: string;
@@ -46,7 +46,7 @@ export const BookForm: React.FC<{
   submitCallback,
   authors,
   genres,
-  defaultValues = {
+  initValues = {
     title: "",
     isbn: "",
     author: "",
@@ -56,7 +56,7 @@ export const BookForm: React.FC<{
 }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues,
+    defaultValues: initValues,
   });
 
   return (
@@ -84,9 +84,7 @@ export const BookForm: React.FC<{
               <FormControl>
                 <Input placeholder="input ISBN" {...field} />
               </FormControl>
-              <FormDescription>
-                ISBN-13 ex.. 9781566199094
-              </FormDescription>
+              <FormDescription>ISBN-13 ex.. 9781566199094</FormDescription>
               <FormMessage />
             </FormItem>
           )}

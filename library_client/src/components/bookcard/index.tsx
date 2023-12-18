@@ -10,7 +10,11 @@ import {
 import { BookOpenText } from "lucide-react";
 import { Separator } from "../ui/separator";
 
-export const BookCard: React.FC<{ bookItem: Book }> = function ({ bookItem }) {
+export const BookCard: React.FC<{
+  bookItem: Book;
+  cb?: (id: number) => void;
+  cbText?: string;
+}> = function ({ bookItem, cb, cbText }) {
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -19,6 +23,7 @@ export const BookCard: React.FC<{ bookItem: Book }> = function ({ bookItem }) {
       </CardHeader>
       <CardContent>
         <BookOpenText />
+        <span onClick={() => cb && cb(bookItem.id)}>{cbText}</span>
         <Separator />
         <div>
           {bookItem.author_name} {bookItem.author_last_name}

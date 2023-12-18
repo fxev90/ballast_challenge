@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BookViewParams, useBookViews } from "..";
 import { SearchBook, SearchParam } from "@/components/searchBook";
 import { BookCard } from "@/components/bookcard";
+import { useNavigate } from "react-router";
 
 export const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [params, setParams] = useState<BookViewParams>({});
   const { data, refetch } = useBookViews({ params });
 
@@ -16,12 +18,19 @@ export const Dashboard: React.FC = () => {
     setParams({ [param.type]: param.term });
   };
 
+  const redirectToBookEdit = (id: number) => navigate(`../book/edit/${id}`);
+
   return (
     <div className="p-4 ">
       <SearchBook submitCallback={handleSubmitSearch} />
       <div className="flex flex-wrap gap-2 m-4">
         {data?.data.map((book, index) => (
-          <BookCard key={`display-book-${index}`} bookItem={book} />
+          <BookCard
+            key={`display-book-${index}`}
+            cb={redirectToBookEdit}
+            cbText="Edit"
+            bookItem={book}
+          />
         ))}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { CreateBook, Dashboard } from "@/features/librarian";
+import { CreateBook, Dashboard, EditBook } from "@/features/librarian";
 import { Main } from "@/features/misc";
 import { Navigate } from "react-router-dom";
 
@@ -18,6 +18,7 @@ export const protectedRoutes = {
           element: <Dashboard />,
         },
         { path: "book/create", element: <CreateBook /> },
+        { path: "book/edit/:bookId", element: <EditBook /> },
         redirection,
       ],
     },

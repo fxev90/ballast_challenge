@@ -1,13 +1,24 @@
 import { axios } from "@/lib/axios";
 import { Book } from "../types";
-import { ExtractFnReturnType, QueryConfig } from "@/lib/react-query";
+import {
+  ExtractFnReturnType,
+  MutationConfig,
+  QueryConfig,
+} from "@/lib/react-query";
 import { useMutation, useQuery } from "@tanstack/react-query";
+
+export interface BookResponse
+  extends Omit<Book, "genre_name" | "author_name" | "author_last_name"> {
+  copies: number;
+  genre: string;
+  author: string;
+}
 
 export const book = ({
   bookId,
 }: {
   bookId: string;
-}): Promise<{ data: Book }> => {
+}): Promise<{ data: BookResponse }> => {
   return axios.get(`/books/${bookId}`);
 };
 
@@ -38,14 +49,12 @@ export const createBook = (data: CreateBookDTO): Promise<{ data: Book }> => {
   return axios.post("/books", data);
 };
 
-export const updateBook = ({
-  bookId,
-  data,
-}: {
-  bookId: string;
-  data: Omit<Book, "id">;
-}): Promise<{ data: Book }> => {
-  return axios.post(`/books/${bookId}`, data);
+interface EditBookDTO extends CreateBookDTO {
+  id: number;
+}
+
+export const updateBook = (data: EditBookDTO): Promise<{ data: Book }> => {
+  return axios.post(`/books/${data.id}`, data);
 };
 
 export const useCreateBook = () => {
@@ -57,11 +66,18 @@ export const useCreateBook = () => {
   });
 };
 
-/*export const useUpdateBook = (bookId: string) => {
+type MutationFnType = typeof updateBook;
+
+type UseUpdateBookOption = {
+  config?: MutationConfig<MutationFnType>;
+};
+
+export const useUpdateBook = ({ config }: UseUpdateBookOption) => {
   return useMutation({
-    onSuccess: (data) => {
-      console.log(`book created ${data}`);
+    onSuccess: () => {
+      alert(`book succesfully updated!`);
     },
     mutationFn: updateBook,
+    ...config,
   });
-};*/
+};
