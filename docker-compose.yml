@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  db:
+    image: mysql:latest
+    restart: on-failure
+    ports:
+      - "33062:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db:/var/lib/mysql/
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ballast-dev
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
+  #Backend Services
+  
+  laravel_api:
+    build: .
+    restart: on-failure
+    depends_on:
+      - db
+    ports: 
+      - "80:80"
+    env_file: 
+      - ./.env
+    volumes:
+      - .:/library_api:delegated
+    networks:
+      - ballast-dev
+
+
+#Volumes
+volumes:
+  db:
+
+networks:
+  ballast-dev: {}
