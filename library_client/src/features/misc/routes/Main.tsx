@@ -20,7 +20,7 @@ export const Main = () => {
   const { mutate } = useLogout();
 
   const logoutCallback = () => {
-    mutate({ email, password: "" });
+    mutate(email);
   };
 
   const logoutItem = {

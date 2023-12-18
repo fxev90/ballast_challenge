@@ -14,12 +14,11 @@ async function authRequestInterceptor(config: InternalAxiosRequestConfig) {
     !Cookies.get("XSRF-TOKEN")
   ) {
     await setCSRFToken();
-    //Cookies.set("XSRF-TOKEN", "TOKEN SET");
   }
   const token = storage.getToken();
 
   if (token) {
-    config.headers.Authorization = `${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   config.headers.Accept = "application/json";
   return config;
