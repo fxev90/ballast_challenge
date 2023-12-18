@@ -13,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         \DB::statement("
-            CREATE VIEW book_view AS
+            CREATE OR REPLACE VIEW  book_view AS
             SELECT
                 b.id AS book_id,
                 b.book_title AS title,
