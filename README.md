@@ -119,3 +119,7 @@ Password=123456789
 Member
 user=user@example.com
 password=123456789
+
+### Mysql config
+
+is beint set from init.sql file
