@@ -110,3 +110,12 @@ npm run dev
 ```
 
 The application will start running on [http://localhost:3000/]
+
+### DEMO Credentials
+Librarian
+user=admin@example.com
+Password=123456789
+
+Member
+user=user@example.com
+password=123456789
