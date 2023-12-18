@@ -87,7 +87,19 @@ php artisan migrate --seed
 ```bash
 php artisan test
 ```
+Add this information to your host file
+127.0.0.1      laravel_api.test
+### Common location for host file
+Windows:
 
+Path: C:\Windows\System32\drivers\etc\hosts
+Linux and macOS:
+
+Path: /etc/hosts
+
+```bash
+sudo nano /etc/hosts
+```
 ## Running the React Application
 
 ### Navigate to the React Folder
@@ -110,3 +122,16 @@ npm run dev
 ```
 
 The application will start running on [http://localhost:3000/]
+
+### DEMO Credentials
+Librarian
+user=admin@example.com
+Password=123456789
+
+Member
+user=user@example.com
+password=123456789
+
+### Mysql config
+
+is being set from init.sql file
