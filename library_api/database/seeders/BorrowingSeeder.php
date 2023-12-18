@@ -14,6 +14,6 @@ class BorrowingSeeder extends Seeder
      */
     public function run(): void
     {
-        Borrowing::factory(10)->create();
+        Borrowing::factory(40)->create();
     }
 }
