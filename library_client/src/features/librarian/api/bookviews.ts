@@ -4,7 +4,7 @@ import { ExtractFnReturnType, QueryConfig } from "@/lib/react-query";
 import { Book } from "../types";
 import { ResponseBody } from "@/types";
 
-interface Params
+export interface BookViewParams
   extends Partial<Omit<Book, "id" | "author_name" | "author_last_name">> {
   search?: string;
 }
@@ -14,7 +14,7 @@ export const bookViews = ({
   isbn,
   title,
   genre_name,
-}: Params): Promise<ResponseBody<Book>> => {
+}: BookViewParams): Promise<ResponseBody<Book>> => {
   return axios.get(`/bookViews`, {
     params: {
       search,
@@ -28,7 +28,7 @@ export const bookViews = ({
 type QueryFnType = typeof bookViews;
 
 type UseBookViewsOptions = {
-  params: Params;
+  params: BookViewParams;
   config?: QueryConfig<QueryFnType>;
 };
 

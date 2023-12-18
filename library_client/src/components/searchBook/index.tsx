@@ -20,10 +20,10 @@ const FormSchema = z.object({
   }),
 });
 
-export type DTO = z.infer<typeof FormSchema>;
+export type SearchParam = z.infer<typeof FormSchema>;
 
 export const SearchBook: React.FC<{
-  submitCallback: (data: DTO) => void;
+  submitCallback: (data: SearchParam) => void;
 }> = function ({ submitCallback }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -46,7 +46,7 @@ export const SearchBook: React.FC<{
             <FormItem>
               <FormLabel>Search:</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="Search for a book" {...field} />
+                <Input placeholder="Search for a book" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
