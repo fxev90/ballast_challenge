@@ -71,13 +71,13 @@ export const useDueBook = ({ due_date, config }: DueBookViewsOptions) => {
   });
 };
 
-export const overdueBooks = (): Promise<BorrowedBook[]> => {
+export const overdueBooks = (): Promise<{ data: BorrowedBook[] }> => {
   return axios.get("borrowedBooks-overdue");
 };
 
 export const useOverdueBook = () => {
   return useQuery<ExtractFnReturnType<typeof overdueBooks>>({
-    queryKey: ["due_books"],
+    queryKey: ["overdue_books"],
     queryFn: () => overdueBooks(),
   });
 };

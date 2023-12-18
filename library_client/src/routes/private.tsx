@@ -1,4 +1,9 @@
-import { CreateBook, Dashboard, EditBook } from "@/features/librarian";
+import {
+  CreateBook,
+  Dashboard as LibrarianDashboard,
+  EditBook,
+  BorrowedLibraryBooks,
+} from "@/features/librarian";
 import { Dashboard as MemberDashboad } from "@/features/member";
 import { Main } from "@/features/misc";
 import { Navigate } from "react-router-dom";
@@ -16,9 +21,10 @@ export const protectedRoutes = {
       children: [
         {
           path: "dashboard",
-          element: <Dashboard />,
+          element: <LibrarianDashboard />,
         },
         { path: "book/create", element: <CreateBook /> },
+        { path: "book/borrowed", element: <BorrowedLibraryBooks /> },
         { path: "book/edit/:bookId", element: <EditBook /> },
         redirection,
       ],

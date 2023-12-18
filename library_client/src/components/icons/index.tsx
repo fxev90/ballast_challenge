@@ -1,4 +1,4 @@
-import { LogOut, LayoutDashboard, BookUp, BadgeAlert } from "lucide-react";
+import { LogOut, LayoutDashboard, BookUp, BookMarked } from "lucide-react";
 
 export const ItemIcon: React.FC<{ itemKey: string; className: string }> = ({
   itemKey,
@@ -12,6 +12,6 @@ export const ItemIcon: React.FC<{ itemKey: string; className: string }> = ({
     case "Logout":
       return <LogOut className={className} />;
     default:
-      return <BadgeAlert className={className} />;
+      return <BookMarked className={className} />;
   }
 };
