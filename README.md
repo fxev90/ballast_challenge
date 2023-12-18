@@ -134,4 +134,4 @@ password=123456789
 
 ### Mysql config
 
-is beint set from init.sql file
+is being set from init.sql file
