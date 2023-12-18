@@ -72,6 +72,7 @@ Route::get('/borrowings-total','\App\Http\Controllers\API\BorrowingController@to
 =============================*/
 
 Route::apiResource('/borrowedBooks', \App\Http\Controllers\API\BorrowedBooksController::class)->middleware('auth:sanctum');
+Route::get('/borrowedBooks-overdue','\App\Http\Controllers\API\BorrowedBooksController@booksOverdue');
 
 /*=====  End of borrowedBooks   ======*/
 
