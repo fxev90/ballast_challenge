@@ -6,7 +6,7 @@ import storage from "@/utils/storage";
 export const AppRoutes = () => {
   const auth = storage.getUser();
 
-  const routes = auth?.id ? protectedRoutes : publicRoutes;
+  const routes = auth?.id ? protectedRoutes[auth.user_type] : publicRoutes;
 
   const element = useRoutes([...routes]);
 

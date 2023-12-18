@@ -13,8 +13,8 @@ async function authRequestInterceptor(config: InternalAxiosRequestConfig) {
       config.method == "delete") &&
     !Cookies.get("XSRF-TOKEN")
   ) {
-    storage.clearToken();
     await setCSRFToken();
+    //Cookies.set("XSRF-TOKEN", "TOKEN SET");
   }
   const token = storage.getToken();
 
