@@ -6,7 +6,6 @@ export const protectedRoutes = [
     path: "/*",
     element: (
       <>
-        Logged In!
         <Button
           onClick={() => {
             storage.clearToken();

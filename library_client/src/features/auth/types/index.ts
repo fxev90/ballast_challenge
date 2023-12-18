@@ -4,13 +4,14 @@ export type LoginCredentialsDTO = {
 };
 
 export interface User {
+  id: number;
+  email: string;
   names: string;
   last_names: string;
-  email: string;
-  id: number;
+  user_type: "Librarian" | "Member";
 }
 
-export interface UserRegistrationDTO extends Omit<User, "id"> {
+export interface UserRegistrationDTO extends Omit<User, "id" | "user_type"> {
   password: string;
   password_confirmation: string;
 }
