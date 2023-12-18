@@ -23,6 +23,7 @@ class CreateBorrowingRequest extends FormRequest
                     }
                 },
                 ],
+            "user_id" => "required",
             'due_date' => 'required'
         ];
     }
