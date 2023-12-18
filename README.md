@@ -87,6 +87,8 @@ php artisan migrate --seed
 ```bash
 php artisan test
 ```
+
+### Host settings
 Add this information to your host file
 127.0.0.1      laravel_api.test
 ### Common location for host file
@@ -108,6 +110,9 @@ Go to the root folder of the repo then
 ```bash
 cd ../library_client
 ```
+### Environment Setup for React app
+
+Copy the `.env.example` file and rename it to `.env`. Update the `.env` file with your actual environment variables. by default will be  http://laravel_api.test
 
 ### Install Dependencies
 
