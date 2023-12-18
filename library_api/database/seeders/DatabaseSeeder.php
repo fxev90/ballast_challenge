@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
             'user_type' => 'Librarian',
             'password' =>  bcrypt(env('DEMO_PASSWORD','123456789')),
         ]);
+
+        $this->call(AuthorsSeeder::class);
+        $this->call(GenreSeeder::class);
+        $this->call(BookSeeder::class);
+        $this->call(BorrowingSeeder::class);
     }
 }
