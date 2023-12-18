@@ -1,11 +1,6 @@
-import { Dashboard } from "@/features/librarian/routes/dashboard";
+import { CreateBook, Dashboard } from "@/features/librarian";
 import { Main } from "@/features/misc";
 import { Navigate } from "react-router-dom";
-
-/*const { DiscussionsRoutes } = lazyImport(
-  () => import('@/features/discussions'),
-  'DiscussionsRoutes'
-);*/
 
 const redirection = {
   path: "/",
@@ -22,7 +17,7 @@ export const protectedRoutes = {
           path: "dashboard",
           element: <Dashboard />,
         },
-        { path: "book/create", element: <>Create a Book</> },
+        { path: "book/create", element: <CreateBook /> },
         redirection,
       ],
     },

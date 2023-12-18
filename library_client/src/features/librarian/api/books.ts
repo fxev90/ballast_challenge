@@ -26,7 +26,15 @@ export const useBook = ({ bookId, config }: UseBooksOptions) => {
   });
 };
 
-export const createBook = (data: Omit<Book, "id">): Promise<{ data: Book }> => {
+type CreateBookDTO = {
+  title: string;
+  isbn: string;
+  author: number;
+  genre: number;
+  copies: number;
+};
+
+export const createBook = (data: CreateBookDTO): Promise<{ data: Book }> => {
   return axios.post("/books", data);
 };
 
@@ -42,8 +50,8 @@ export const updateBook = ({
 
 export const useCreateBook = () => {
   return useMutation({
-    onSuccess: (data) => {
-      console.log(`book created ${data}`);
+    onSuccess: () => {
+      alert(`book successfully created!`);
     },
     mutationFn: createBook,
   });
