@@ -1,4 +1,4 @@
-import { Dashboard } from "@/features/librarian/components/dashboard";
+import { Dashboard } from "@/features/librarian/routes/dashboard";
 import { Main } from "@/features/misc";
 import { Navigate } from "react-router-dom";
 

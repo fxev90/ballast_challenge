@@ -19,7 +19,7 @@ type Props = {
 export const DropdownBar: React.FC<Props> = function ({ items, userType }) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger datatest-id="trigger" asChild>
         <Menu className="mr-2 h-6 w-6 text-white" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
@@ -30,7 +30,11 @@ export const DropdownBar: React.FC<Props> = function ({ items, userType }) {
             <Fragment key={`dp-${menuItem.key}`}>
               {menuItem.key === "Logout" && <DropdownMenuSeparator />}
               <DropdownMenuItem onClick={menuItem.cb}>
-                <ItemIcon itemKey={menuItem.key} className="mr-2 h-4 w-4" />
+                <ItemIcon
+                  datatest-id={`item-icon-${menuItem.key}`}
+                  itemKey={menuItem.key}
+                  className="mr-2 h-4 w-4"
+                />
                 <span>{menuItem.name}</span>
               </DropdownMenuItem>
             </Fragment>
