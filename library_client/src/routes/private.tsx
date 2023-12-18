@@ -1,4 +1,5 @@
 import { CreateBook, Dashboard, EditBook } from "@/features/librarian";
+import { Dashboard as MemberDashboad } from "@/features/member";
 import { Main } from "@/features/misc";
 import { Navigate } from "react-router-dom";
 
@@ -27,7 +28,10 @@ export const protectedRoutes = {
     {
       path: "/",
       element: <Main />,
-      children: [{ path: "dashboard", element: <>Dashboard</> }, redirection],
+      children: [
+        { path: "dashboard", element: <MemberDashboad /> },
+        redirection,
+      ],
     },
   ],
 };
