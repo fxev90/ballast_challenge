@@ -37,6 +37,11 @@ export const Main = () => {
         cb: () => navigate("/dashboard"),
       },
       {
+        key: "BorrowedBooks",
+        name: "Borrowed Books",
+        cb: () => navigate("/book/borrowed"),
+      },
+      {
         key: "CreateBook",
         name: "Create Book",
         cb: () => navigate("/book/create"),

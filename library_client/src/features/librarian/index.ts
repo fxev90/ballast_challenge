@@ -6,3 +6,4 @@ export * from "./types";
 export * from "./routes/dashboard";
 export * from "./routes/createBook";
 export * from "./routes/editBook";
+export * from "./routes/borrowedBooks";
