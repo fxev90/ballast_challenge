@@ -13,7 +13,7 @@ class CreateBorrowingRequest extends FormRequest
             'book_id' => [
                 'required',
                 'exists:books,id',
-                'unique:borrowings,book_id,NULL,id,returned_date,NULL,user_id,' . auth()->user()->id,
+                'unique:borrowings,book_id,NULL,id,returned_date,NULL,user_id,' . $this->user_id,
                 function ($attribute, $value, $fail) {
                     // Check if there are any unreturned borrowings for the selected book and counthow many
                     $countUnreturnedBorrowings = Borrowing::where('book_id', $value)->whereNull('returned_date')->count();
@@ -23,6 +23,7 @@ class CreateBorrowingRequest extends FormRequest
                     }
                 },
                 ],
+            "user_id" => "required",
             'due_date' => 'required'
         ];
     }

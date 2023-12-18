@@ -9,6 +9,7 @@ use App\Http\Resources\BorrowedBooks\BorrowedBooksResource;
 use App\Models\BorrowedBooks;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Carbon;
 
 class BorrowedBooksController extends Controller
 {
@@ -28,6 +29,13 @@ class BorrowedBooksController extends Controller
     public function show(BorrowedBooks $borrowedBooks): JsonResponse
     {
         return $this->responseSuccess(null, new BorrowedBooksResource($borrowedBooks));
+    }
+
+    public function booksOverdue(): AnonymousResourceCollection
+    {
+        $borrowedBooks = BorrowedBooks::whereNull('returned_date')->where('due_date', '<=', Carbon::today())->useFilters()->dynamicPaginate();
+
+        return BorrowedBooksResource::collection($borrowedBooks);
     }
 
 }
