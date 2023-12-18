@@ -9,7 +9,7 @@ class CreateGenreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            "genre_name" => "required|string|max:255",
         ];
     }
 }

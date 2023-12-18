@@ -19,38 +19,49 @@ class GenreTest extends TestCase
         parent::setUp();
     }
 
+    public function parseArray($inputArray){
+
+        // Define a mapping of old keys to new keys
+        $keyMapping = [
+            'genre_name' => 'name',
+        ];
+        
+        // Create a new array with the updated keys
+        $outputArray = [];
+        foreach ($inputArray as $oldKey => $value) {
+            $newKey = $keyMapping[$oldKey];
+            $outputArray[$newKey] = $value;
+        }
+        return $outputArray;
+    }
+
     public function testCreateGenre(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
 
         $payload = Genre::factory()->make([])->toArray();
-
         $this->json('POST', $this->endpoint, $payload)
-             ->assertStatus(201)
-             ->assertSee($payload['name']);
-
-        $this->assertDatabaseHas($this->tableName, ['id' => 1]);
+            ->assertStatus(201)
+            ->assertSee($payload['genre_name']);
+        $genre = Genre::all()->first();
+        $this->assertDatabaseHas($this->tableName, ['id' => $genre->id]);
     }
 
     public function testViewAllGenresSuccessfully(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
-
         $this->actingAs(User::factory()->create());
 
         Genre::factory(5)->create();
 
         $this->json('GET', $this->endpoint)
-             ->assertStatus(200)
-             ->assertJsonCount(5, 'data')
-             ->assertSee(Genre::first(rand(1, 5))->name);
+            ->assertStatus(200)
+            ->assertJsonCount(5, 'data')
+            ->assertSee(Genre::inRandomOrder()->first()->genre_name);
     }
 
     public function testViewAllGenresByFooFilter(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
 
@@ -58,63 +69,59 @@ class GenreTest extends TestCase
 
         $this->json('GET', $this->endpoint.'?foo=1')
              ->assertStatus(200)
-             ->assertSee('foo')
              ->assertDontSee('foo');
     }
 
     public function testsCreateGenreValidation(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
 
         $data = [
+            "genre_name" => 1231
         ];
 
         $this->json('post', $this->endpoint, $data)
-             ->assertStatus(422);
+            ->assertStatus(422);
     }
 
     public function testViewGenreData(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
 
-        Genre::factory()->create();
+        $genre = Genre::factory()->create();
 
-        $this->json('GET', $this->endpoint.'/1')
-             ->assertSee(Genre::first()->name)
-             ->assertStatus(200);
+        $this->json('GET', $this->endpoint.'/'.$genre->id)
+            ->assertSee($genre->genre_name)
+            ->assertStatus(200);
     }
 
     public function testUpdateGenre(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
 
-        Genre::factory()->create();
+        $genre = Genre::factory()->create();
 
         $payload = [
-            'name' => 'Random'
+            'genre_name' => 'Random'
         ];
 
-        $this->json('PUT', $this->endpoint.'/1', $payload)
-             ->assertStatus(200)
-             ->assertSee($payload['name']);
+        $this->json('PUT', $this->endpoint.'/'.$genre->id, $payload)
+            ->assertStatus(200)
+            ->assertSee($payload['genre_name']);
     }
 
     public function testDeleteGenre(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
 
-        Genre::factory()->create();
+        $genre = Genre::factory()->create();
 
-        $this->json('DELETE', $this->endpoint.'/1')
-             ->assertStatus(204);
+        $this->json('DELETE', $this->endpoint.'/'.$genre->id)
+            ->assertStatus(204);
 
         $this->assertEquals(0, Genre::count());
     }
