@@ -1,22 +1,33 @@
-import { Button } from "@/components/ui/button";
-import storage from "@/utils/storage";
+import { CreateBook, Dashboard, EditBook } from "@/features/librarian";
+import { Main } from "@/features/misc";
+import { Navigate } from "react-router-dom";
 
-export const protectedRoutes = [
-  {
-    path: "/*",
-    element: (
-      <>
-        Logged In!
-        <Button
-          onClick={() => {
-            storage.clearToken();
-            storage.clearUser();
-            window.location.assign(window.location.origin as unknown as string);
-          }}
-        >
-          Logout
-        </Button>
-      </>
-    ),
-  },
-];
+const redirection = {
+  path: "/",
+  element: <Navigate to="/dashboard" replace />,
+};
+
+export const protectedRoutes = {
+  Librarian: [
+    {
+      path: "/",
+      element: <Main />,
+      children: [
+        {
+          path: "dashboard",
+          element: <Dashboard />,
+        },
+        { path: "book/create", element: <CreateBook /> },
+        { path: "book/edit/:bookId", element: <EditBook /> },
+        redirection,
+      ],
+    },
+  ],
+  Member: [
+    {
+      path: "/",
+      element: <Main />,
+      children: [{ path: "dashboard", element: <>Dashboard</> }, redirection],
+    },
+  ],
+};

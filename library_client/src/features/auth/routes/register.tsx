@@ -21,7 +21,7 @@ export const Register = () => {
   const navigateToLogin = () => navigate("/");
 
   return (
-    <Layout title="Log in to your account">
+    <Layout title="Sign Up">
       <RegistrationForm submitCallback={handleSubmit} />
       <Separator className="m-4" />
       <div className="grid place-items-center">
