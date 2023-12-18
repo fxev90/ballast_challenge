@@ -12,7 +12,7 @@ return new class extends Migration {
     public function up()
     {
         DB::statement('
-            CREATE VIEW borrowings_due_count_view AS
+            CREATE OR REPLACE VIEW  borrowings_due_count_view AS
             SELECT
                 users.names,
                 users.last_names,

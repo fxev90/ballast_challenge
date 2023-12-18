@@ -21,102 +21,96 @@ class AuthorsTest extends TestCase
 
     public function testCreateAuthors(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
+        
 
         $this->actingAs(User::factory()->create());
 
         $payload = Authors::factory()->make([])->toArray();
 
         $this->json('POST', $this->endpoint, $payload)
-             ->assertStatus(201)
-             ->assertSee($payload['name']);
+            ->assertStatus(201)
+            ->assertSee($payload['author_names']);
 
         $this->assertDatabaseHas($this->tableName, ['id' => 1]);
     }
 
     public function testViewAllAuthorsSuccessfully(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
+
 
         $this->actingAs(User::factory()->create());
 
         Authors::factory(5)->create();
 
         $this->json('GET', $this->endpoint)
-             ->assertStatus(200)
-             ->assertJsonCount(5, 'data')
-             ->assertSee(Authors::first(rand(1, 5))->name);
+            ->assertStatus(200)
+            ->assertJsonCount(5, 'data')
+            ->assertSee( Authors::inRandomOrder()->first()->author_names);
     }
 
     public function testViewAllAuthorsByFooFilter(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
+
 
         $this->actingAs(User::factory()->create());
 
         Authors::factory(5)->create();
 
         $this->json('GET', $this->endpoint.'?foo=1')
-             ->assertStatus(200)
-             ->assertSee('foo')
-             ->assertDontSee('foo');
+            ->assertStatus(200)
+            ->assertDontSee('foo');
     }
 
-    public function testsCreateAuthorsValidation(): void
+    public function testsCreateAuthorValidation(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
-
+        
         $this->actingAs(User::factory()->create());
 
         $data = [
+            "author_names" => "",
+            "author_last_names" => ""
         ];
 
         $this->json('post', $this->endpoint, $data)
-             ->assertStatus(422);
+            ->assertStatus(422);
     }
 
     public function testViewAuthorsData(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
 
         Authors::factory()->create();
-
-        $this->json('GET', $this->endpoint.'/1')
-             ->assertSee(Authors::first()->name)
-             ->assertStatus(200);
+        $randomAuthor = Authors::inRandomOrder()->first();
+        $this->json('GET', $this->endpoint.'/'.$randomAuthor->id)
+            ->assertSee(Authors::find($randomAuthor->id)->author_names)
+            ->assertStatus(200);
     }
 
     public function testUpdateAuthors(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
-
         $this->actingAs(User::factory()->create());
 
         Authors::factory()->create();
-
+        $author =  Authors::inRandomOrder()->first();
         $payload = [
-            'name' => 'Random'
+            'author_names' => 'Random'
         ];
 
-        $this->json('PUT', $this->endpoint.'/1', $payload)
-             ->assertStatus(200)
-             ->assertSee($payload['name']);
+        $this->json('PUT', $this->endpoint.'/'.$author->id, $payload)
+            ->assertStatus(200)
+            ->assertSee($author->names);
     }
 
     public function testDeleteAuthors(): void
     {
-        $this->markTestIncomplete('This test case needs review.');
 
         $this->actingAs(User::factory()->create());
-
-        Authors::factory()->create();
-
-        $this->json('DELETE', $this->endpoint.'/1')
-             ->assertStatus(204);
-
-        $this->assertEquals(0, Authors::count());
+        Authors::factory(1)->create();
+        $author =  Authors::all()->first();
+        $this->json('DELETE', $this->endpoint.'/'.$author->id)
+            ->assertStatus(204);
+        $this->assertEquals(1, Authors::count());
     }
     
 }

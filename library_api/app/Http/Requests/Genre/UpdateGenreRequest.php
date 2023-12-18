@@ -9,7 +9,7 @@ class UpdateGenreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            "genre_name" => "required"
         ];
     }
 }

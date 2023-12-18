@@ -13,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         \DB::statement('
-            CREATE VIEW borrowings_view AS
+            CREATE OR REPLACE VIEW  borrowings_view AS
             SELECT
                 br.id,
                 br.created_at AS borrowed_date,
